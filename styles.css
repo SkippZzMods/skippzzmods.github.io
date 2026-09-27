@@ -1,9 +1,5 @@
 :root {
-    --color-bg: #0f172a;      /* matches your bg-slate-900 */
-    --color-text: #e2e8f0;    /* matches your text-slate-200 */
-    --color-muted: #94a3b8;   /* matches your text-slate-400 */
-    --color-accent: #818cf8;  /* matches your indigo-400 hover color */
-    --font-main: 'Inter', sans-serif;
+    --font-main: 'Helvetica Neue', sans-serif;
   }
   
   body {
@@ -19,6 +15,7 @@
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 .pre-animate {
