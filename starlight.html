@@ -7,6 +7,32 @@
     
     <!-- Import Tailwind CSS V4 -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <style type="text/tailwindcss">
+         @theme {
+            --color-main: #0f1410;
+            --color-main-light: #18221a;
+            --color-main-lighter: #283C2C;
+            
+            --color-taskbar: #2c3f30;
+
+            --color-text-title: #FFFFFF;
+            --color-text-subtitle: #7FB281;
+            --color-text-paragraph: #C7C7C7;
+
+            --color-text-main: #f5f7f5;
+            --color-text-hover: #66EC81;
+            
+            --color-text-bold: #5e9367;
+            --color-text-muted: #D2D2CE;
+
+            --color-text-alt: #57422C;
+            --color-text-alt-hover: #57422C;
+
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+        }
+    </style>
     
     <!-- Import a clean Google Font (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -24,31 +50,42 @@
     <link rel="icon" type="image/png" href="img/CSlogo.png">
 </head>
 
-<body class="bg-slate-900 text-slate-200 antialiased selection:bg-indigo-500 selection:text-white">
+<body class="bg-main text-text-main antialiased selection:text-white">
 
-    <header>
-        <nav class="bg-slate-700 flex flex-wrap justify-center gap-x-4 md:gap-x-8 px-4 md:px-16 py-4 md:py-6">
-            <a href="contact.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Contact</a>
-            <a href="index.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Home</a>
-            <a href="spirit.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Spirit Reforged</a>
-            <a href="starlight.html" aria-current="page" class="text-base md:text-2xl font-bold text-white transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Starlight River</a>
+    <header class="sticky top-0 z-50 shadow-xl bg-taskbar/70 backdrop-blur-md transition duration-150 hover:bg-taskbar">
+        <nav class="flex md:grid flex-col md:grid-cols-3 items-center px-6 md:px-12 py-3 md:py-6">
+            <div class="flex items-center justify-start object-contain">
+                <img src="img/CSlogo.png" class="w-12 md:w-20 h-12 md:h-20 rounded-lg shadow-xl/60" alt="Collin Summers Logo">
+                <p class="px-6 font-bold font-sans text-base md:text-2xl text-text-title whitespace-nowrap">COLLIN SUMMERS<br>
+                    <span class="font-italic font-serif text-text-paragraph">game developer</span>
+                </p>       
+            </div>
+           
+            <div class="flex items-center justify-center gap-x-6 md:gap-x-10 py-4">
+                <a href="index.html" aria-current="page" class="text-base md:text-2xl text-shadow-md text-text-main transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Home</a>
+                <a href="contact.html" class="md:text-2xl text-text-main text-shadow-md transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Contact</a>
+                <a href="spirit.html" class="text-base md:text-2xl text-text-main text-shadow-md whitespace-nowrap transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Spirit Reforged</a>
+                <a href="starlight.html" class="text-base md:text-2xl text-text-title font-bold text-shadow-md whitespace-nowrap transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Starlight River</a>
+            </div>
+
+            <div class="flex items-center justify-end"></div>
         </nav>
     </header>
 
     <main>
         <section id="title" class="max-w-7xl mx-auto px-2 md:px-6 py-5 md:py-20 flex flex-col items-center text-center pre-animate">
-            <h1 class="bg-[url('img/starlightRiver.png')] bg-cover bg-center bg-slate-900/70 bg-blend-overlay rounded-xl shadow-xl p-10 md:p-30 text-6xl md:text-9xl font-bold text-white">
+            <h1 class="bg-[url('img/starlightRiver.png')] whitespace-nowrap border-4 border-white bg-cover bg-center bg-main/70 bg-blend-overlay rounded-xl shadow-2xl p-10 md:p-30 text-6xl md:text-9xl font-bold font-serif text-shadow-lg/90 text-white">
                 Starlight River
             </h1>
 
-            <h2 class="text-xl md:text-2xl italic text-slate-400 mb-2 py-2">
+            <h2 class="text-xl md:text-2xl italic text-text-subtitle mb-2 py-2">
                 VFX heavy Terraria mod, pushing the boundaries of tModLoader with 500,000+ downloads
             </h2>
 
             <article class="max-w-5xl flex justify-center gap-x-8 md:gap-x-12">
-                <a href="https://github.com/ProjectStarlight" class="text-xl md:text-2xl text-slate-400 underline transition duration-50 hover:text-indigo-400">GitHub</a>
-                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2984622072" class="text-xl md:text-2xl text-slate-400 underline transition duration-50 hover:text-indigo-400">Steam</a>
-                <a href="https://discord.gg/FeGEDUX4eC" class="text-xl md:text-2xl text-slate-400 underline transition duration-50 hover:text-indigo-400">Discord</a>
+                <a href="https://github.com/ProjectStarlight" class="text-shadow-md text-xl md:text-2xl text-text-main underline transition duration-50 hover:scale-105 hover:text-text-hover hover:text-shadow-white/50">GitHub</a>
+                <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=2984622072" class="text-shadow-md text-xl md:text-2xl text-text-main underline transition duration-50 hover:scale-105 hover:text-text-hover hover:text-shadow-white/50">Steam</a>
+                <a href="https://discord.gg/FeGEDUX4eC" class="text-shadow-md text-xl md:text-2xl text-text-main underline transition duration-50 hover:scale-105 hover:text-text-hover hover:text-shadow-white/50">Discord</a>
             </article>
         </section>
 
@@ -57,7 +94,7 @@
                 Overview
             </h2>
 
-            <p class="bg-slate-800 rounded-lg text-xl md:text-2xl font-semibold text-white px-4 py-4">
+            <p class="bg-main-light border-4 border-main-lighter rounded-lg text-xl md:text-2xl font-semibold text-text-paragraph px-4 py-4">
                 As one of the lead programmers for the mod from 2021-2023, I created over 30 nodes of content with a very high bar of quality
                 This includes various procedurally generated animations, shaders written in HLSL, NPC behaviors, post-processing pixelization effects <br>
                 and more shown below!
@@ -65,18 +102,18 @@
         </section>
 
         <section id="showcase" class="max-w-7xl mx-auto px-2 md:px-6 py-4 md:py-8 flex flex-col items-center text-center">
-            <h2 class="text-4xl md:text-6xl font-bold text-white py-4 pre-animate">
+            <h2 class="text-4xl md:text-6xl font-bold text-text-title py-4 pre-animate">
                 Showcase
             </h2>
 
             <section id="table" class="px-6 md:px-20 py-5">
-                <div class="bg-slate-800 rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6 pre-animate">
+                <div class="bg-main-light border-4 border-main-lighter rounded-lg p-6 flex flex-col md:flex-row items-center justify-between gap-6 pre-animate">
                     <div class="w-full md:w-1/2 flex flex-col gap-2">
-                        <h3 class="text-2xl font-bold italic text-white text-left">
+                        <h3 class="text-2xl font-bold italic text-text-bold text-left">
                             Needler
                         </h3>
 
-                        <p class="text-lg font-medium text-slate-300 text-left">
+                        <p class="text-lg font-medium text-text-paragraph text-left">
                             Implemented all visual effects and behavior, as well as created the <br>
                             post-processing pixelization system used for rendering
                         </p>

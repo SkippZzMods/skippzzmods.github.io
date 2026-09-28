@@ -8,6 +8,32 @@
     <!-- Import Tailwind CSS V4 -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     
+    <style type="text/tailwindcss">
+         @theme {
+            --color-main: #0f1410;
+            --color-main-light: #18221a;
+            --color-main-lighter: #283C2C;
+            
+            --color-taskbar: #2c3f30;
+
+            --color-text-title: #FFFFFF;
+            --color-text-subtitle: #7FB281;
+            --color-text-paragraph: #C7C7C7;
+
+            --color-text-main: #f5f7f5;
+            --color-text-hover: #66EC81;
+            
+            --color-text-bold: #5e9367;
+            --color-text-muted: #D2D2CE;
+
+            --color-text-alt: #57422C;
+            --color-text-alt-hover: #57422C;
+
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+        }
+    </style>
+
     <!-- Import a clean Google Font (Inter) -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
@@ -24,36 +50,74 @@
     <link rel="icon" type="image/png" href="img/CSlogo.png">
 </head>
 
-<body class="bg-slate-900 text-slate-200 antialiased selection:bg-indigo-500 selection:text-white">
-    <header>
-        <nav class="bg-slate-700 flex flex-wrap justify-center gap-x-4 md:gap-x-8 px-4 md:px-16 py-4 md:py-6">
-            <a href="contact.html" aria-current="page" class="text-base md:text-2xl font-bold text-white transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Contact</a>
-            <a href="index.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Home</a>
-            <a href="spirit.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Spirit Reforged</a>
-            <a href="starlight.html" class="text-base md:text-2xl text-slate-400 transition duration-150 hover:text-indigo-400 hover:scale-105 hover:shadow-md">Starlight River</a>
+<body class="bg-main text-text-main antialiased selection:text-white">
+    <header class="sticky top-0 z-50 shadow-xl bg-taskbar/70 backdrop-blur-md transition duration-150 hover:bg-taskbar">
+        <nav class="flex md:grid flex-col md:grid-cols-3 items-center px-6 md:px-12 py-3 md:py-6">
+            <div class="flex items-center justify-start object-contain">
+                <img src="img/CSlogo.png" class="w-12 md:w-20 h-12 md:h-20 rounded-lg shadow-xl/60" alt="Collin Summers Logo">
+                <p class="px-6 font-bold font-sans text-base md:text-2xl text-text-title whitespace-nowrap">COLLIN SUMMERS<br>
+                    <span class="font-italic font-serif text-text-paragraph">game developer</span>
+                </p>       
+            </div>
+           
+            <div class="flex items-center justify-center gap-x-6 md:gap-x-10 py-4">
+                <a href="index.html" aria-current="page" class="text-base md:text-2xl text-shadow-md text-text-main transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Home</a>
+                <a href="contact.html" class="md:text-2xl text-text-title font-bold text-shadow-md transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Contact</a>
+                <a href="spirit.html" class="text-base md:text-2xl text-text-main text-shadow-md whitespace-nowrap transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Spirit Reforged</a>
+                <a href="starlight.html" class="text-base md:text-2xl text-text-main text-shadow-md whitespace-nowrap transition duration-150 hover:text-text-hover hover:scale-105 hover:text-shadow-white/50">Starlight River</a>
+            </div>
+
+            <div class="flex items-center justify-end"></div>
         </nav>
     </header>
 
     <main>
         <section id="summary" class="max-w-4xl mx-auto px-6 py-20 flex flex-col items-center text-center mb-80 pre-animate">
-            <h1 class="text-5xl md:text-9xl font-bold text-white">
+            <h1 class="text-5xl font-serif md:text-9xl font-bold text-white text-shadow-lg">
             Get In Touch!
             </h1>
 
-            <h2 class="text-2xl italic text-slate-400 mb-4">
-                skippzzofficial@gmail.com
-            </h2>
+            <div class="inline-flex items-center gap-x-2 px-4 py-1.5 mt-6 mb-8 rounded-full border border-text-hover/40 bg-text-hover/10">
+                <span class="relative flex h-2.5 w-2.5">
+                    <span class="absolute inline-flex h-full w-full rounded-full bg-text-hover opacity-75 animate-ping"></span>
+                    <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-text-hover"></span>
+                </span>
+                <span class="text-sm md:text-base font-semibold text-text-hover tracking-wide">looking for work!</span>
+            </div>
 
-            <article class="max-w-5xl flex justify-center gap-x-12">
-                <a href="mailto:skippzzofficial@gmail.com" class="text-xl text-slate-400 underline transition duration-50 hover:text-indigo-400">Email Me!</a>
-                <a href="https://github.com/SkippZzMods" class="text-xl text-slate-400 underline transition duration-50 hover:text-indigo-400">GitHub</a>
-                <a href="https://www.linkedin.com/in/collin-summers/" class="text-xl text-slate-400 underline transition duration-50 hover:text-indigo-400">LinkedIn</a>
+            <div class="relative inline-flex items-center gap-x-2 mb-1 group cursor-pointer select-none" id="email-copy-trigger" tabindex="0" role="button" aria-label="Copy email address skippzzofficial@gmail.com to clipboard">
+                <h2 class="text-2xl text-text-subtitle italic underline font-semibold transition duration-150 group-hover:text-text-hover group-focus-visible:text-text-hover">
+                    skippzzofficial@gmail.com
+                </h2>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-text-subtitle transition duration-150 group-hover:text-text-hover group-focus-visible:text-text-hover">
+                    <rect x="9" y="9" width="11" height="11" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span id="copy-tooltip" class="pointer-events-none absolute left-1/2 -translate-x-1/2 -top-9 px-3 py-1 rounded-md bg-main-lighter border border-text-hover/30 text-text-main text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition duration-150 shadow-lg">
+                    Copied!
+                </span>
+            </div>
+
+            <!--Contact links-->
+            <article class="max-w-5xl flex justify-center gap-x-6 md:gap-x-10">
+                <a href="mailto:skippzzofficial@gmail.com" class="group flex flex-col items-center gap-y-2 p-3 rounded-lg opacity-0 animate-from-left transition duration-150 hover:scale-105 hover:text-text-hover focus-visible:scale-105 focus-visible:text-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-hover">
+                    <img src="img/mailIcon.png" class="w-8 md:w-12 h-8 md:h-12 transition duration-150 group-hover:drop-shadow-[0_0_8px_var(--color-text-hover)] group-focus-visible:drop-shadow-[0_0_8px_var(--color-text-hover)]" alt="Mail icon">
+                    <span class="text-xl underline">Email Me!</span>
+                </a>
+                <a href="https://github.com/SkippZzMods" class="group flex flex-col items-center gap-y-2 p-3 rounded-lg opacity-0 animate-from-left delay-1 transition duration-150 hover:scale-105 hover:text-text-hover focus-visible:scale-105 focus-visible:text-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-hover">
+                    <img src="img/githubIcon.png" class="w-8 md:w-12 h-8 md:h-12 transition duration-150 group-hover:drop-shadow-[0_0_8px_var(--color-text-hover)] group-focus-visible:drop-shadow-[0_0_8px_var(--color-text-hover)]" alt="GitHub icon">
+                    <span class="text-xl underline">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/collin-summers/" class="group flex flex-col items-center gap-y-2 p-3 rounded-lg opacity-0 animate-from-left delay-2 transition duration-150 hover:scale-105 hover:text-text-hover focus-visible:scale-105 focus-visible:text-text-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-text-hover">
+                    <img src="img/linkedinIcon.png" class="w-8 md:w-12 h-8 md:h-12 transition duration-150 group-hover:drop-shadow-[0_0_8px_var(--color-text-hover)] group-focus-visible:drop-shadow-[0_0_8px_var(--color-text-hover)]" alt="LinkedIn icon">
+                    <span class="text-xl underline">LinkedIn</span>
+                </a>
             </article>
         </section>
     </main>
 
     <footer>
-        <p class="text-2xl italic text-slate-400 mb-4 text-center pre-animate">
+        <p class="text-2xl italic text-text-muted mb-4 text-center pre-animate">
             Thank you for your consideration
         </p>
     </footer>
@@ -68,6 +132,23 @@
         });
 
         document.querySelectorAll('.pre-animate').forEach(el => observer.observe(el));
+
+        const emailTrigger = document.getElementById('email-copy-trigger');
+        const copyTooltip = document.getElementById('copy-tooltip');
+        const emailAddress = 'skippzzofficial@gmail.com';
+
+        function copyEmailToClipboard() {
+            navigator.clipboard.writeText(emailAddress).then(() => {
+                copyTooltip.textContent = 'Copied!';
+            }).catch(() => {
+                copyTooltip.textContent = 'Copy failed';
+            });
+        }
+
+        if (emailTrigger) {
+            emailTrigger.addEventListener('mouseenter', copyEmailToClipboard);
+            emailTrigger.addEventListener('focus', copyEmailToClipboard);
+        }
     </script>
 </body>
 </html>
