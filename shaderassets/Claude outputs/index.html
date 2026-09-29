@@ -105,7 +105,7 @@
                     were specialized Game Development courses, teaching Unity. <br>
                     I specialize in visual effects and procedural animations. My best showcases of my work reside in Spirit Reforged, there are various<br>
                     videos <a href=spirit.html class="underline text-text-subtitle transition duration-150 hover:text-text-hover">here!</a> <br>
-                    I've mostly worked in 2D, with expertise in HLSL pixel shader work (.. including the shader on this page !), particle systems, and robust OOP systems as well. <br>
+                    I've mostly worked in 2D, with expertise in HLSL pixel shader work, particle systems, and robust OOP systems as well. <br>
                 </p>
             </div>
 
@@ -181,10 +181,6 @@
                     <p class="bg-main-light border-4 border-main-lighter rounded-lg text-xl font-semibold text-text-paragraph px-2 py-2 pre-animate">
                         HTML, Javascript, & Tailwind CSS
                     </p>
-
-                    <p class="bg-main-light border-4 border-main-lighter rounded-lg text-xl font-semibold text-text-paragraph px-2 py-2 pre-animate">
-                        WebGL (The background is a shader!)
-                    </p>
                 </div>
             </div>
         </section>
@@ -248,7 +244,9 @@
             }
         `;
 
-        // very simple shader using both textures in shaderassets/ for a subtle flow
+        // ---- Write your fragment shader here ----
+        // Available uniforms: u_time (seconds, float), u_resolution (canvas px, vec2),
+        // u_tex_1 (shaderassets/supPerlin.png, 512x512), u_tex_2 (shaderassets/swirlNoise2.png, 256x256)
         const fragmentSrc = `
             precision mediump float;
             uniform vec2 u_resolution;
@@ -259,27 +257,8 @@
 
             void main() {
                 vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-
-                vec3 colorMain = vec3(0.059, 0.078, 0.063); 
- 
-                vec2 distortionUv = vec2(uv.x, uv.y + u_time * 0.005);
-
-                float distortion = texture2D(u_tex_2, distortionUv).r;
-
-                vec2 scrollingUv = vec2(uv.x + u_time * cos(u_time) * 0.001, uv.y + sin(u_time) * 0.001 + u_time * 0.02) + u_time * 0.001;
-
-                vec2 scale = vec2(2.0, 2.0) + vec2(3.0, 3.0) * cos(u_time) * 0.025;
-
-                vec4 texColor = texture2D(u_tex_1, vec2(distortion, distortion * 2.0) + scrollingUv * scale);
-                
-                vec3 finalColor = mix(texColor.rgb, colorMain, 0.99);
-
-                if (u_time < 3.0) {
-                    gl_FragColor = vec4(mix(colorMain, finalColor, pow(u_time / 3.0, 2.0)), 1.0);
-                    return;
-                }
-                   
-                gl_FragColor = vec4(finalColor, 1.0);
+                vec4 texColor = texture2D(u_tex_1, uv);
+                gl_FragColor = texColor;
             }
         `;
         // -------------------------------------------
@@ -331,13 +310,27 @@
                 img.onload = () => {
                     gl.activeTexture(gl.TEXTURE0 + unit);
                     gl.bindTexture(gl.TEXTURE_2D, tex);
-                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                    try {
+                        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+                    } catch (err) {
+                        // Most common cause: opening this file directly via file:// —
+                        // WebGL treats that as a tainted cross-origin source and refuses
+                        // to upload it. Serve over http:// (a local server) instead.
+                        console.error(`[shader-bg] texImage2D failed for "${url}" — ` +
+                            `if you're opening this file directly (file://) instead of through ` +
+                            `a local server, that's almost certainly why:`, err);
+                        return;
+                    }
                     // both source images are power-of-two, so REPEAT + mipmaps are safe in WebGL1
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
                     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
                     gl.generateMipmap(gl.TEXTURE_2D);
+                };
+                img.onerror = () => {
+                    console.error(`[shader-bg] failed to load image "${url}" — check the path ` +
+                        `is correct relative to index.html and that the file actually exists there.`);
                 };
                 img.src = url;
                 return tex;
